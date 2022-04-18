@@ -31,8 +31,8 @@ public class GameField extends JPanel implements ActionListener {
         initGame();
         addKeyListener(new FieldKeyListener());
         setFocusable(true);
-
     }
+
     public void initGame(){
         dots = 3;
         for (int i = 0; i < dots; i++) {
@@ -43,10 +43,12 @@ public class GameField extends JPanel implements ActionListener {
         timer.start();
         createApple();
     }
+
     public void createApple(){
         appleX = new Random().nextInt(20)*DOT_SIZE;
         appleY = new Random().nextInt(20)*DOT_SIZE;//Не совсем понятно почему так
     }
+
     public void loadImages(){
         ImageIcon iia = new ImageIcon("apple.png");
         apple = iia.getImage();
@@ -70,35 +72,34 @@ public class GameField extends JPanel implements ActionListener {
             g.drawString(stc,125,SIZE/2);
         }
     }
-
     public  void  move(){
         for (int i = dots; i < 0; i--) {  //НЕ совсем понял как происходит движение
             x[i] = x[i-1];
             y[i] = y[i-1];
-
         }
         if (left){     // Этот момент тоже не до конца понятен
             x[0] -= DOT_SIZE;
-         }if (right){     // Этот момент тоже не до конца понятен
+         }if (right){
             x[0] += DOT_SIZE;
-        }if (up){     // Этот момент тоже не до конца понятен
+        }if (up){
             y[0] -= DOT_SIZE;
-        }if (down){     // Этот момент тоже не до конца понятен
+        }if (down){
             y[0] += DOT_SIZE;
         }
     }
+
 public  void checkApple(){
         if(x[0] == appleX && y[0] == appleY){
             dots++;
             createApple();
         }
 }
+
 public void checkCollisions(){
     for (int i = dots; i < 0; i--) {
         if (i>4&& x[0]==x[i] && y[0] == y [i]){
             inGame = false;
         }
-
     }
     if (x[0]>SIZE){ // если нулевая позиция больше, чем позиция всего поля то этоу луз(
         inGame = false;
@@ -118,8 +119,8 @@ public void checkCollisions(){
            move();
        }
        repaint();
-
     }
+
     class FieldKeyListener extends KeyAdapter{
         @Override
         public void keyPressed(KeyEvent e) {
